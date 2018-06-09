@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <div class="card" style="width: 20rem;">
+        <img class="card-img-top" src="{{ MEDIA_URL }}{{ user.userprofileinfo.profile_pic }}" alt="Card image cap">
+        <div class="card-body">
+            <h4 class="card-title">{{ user.username }}</h4>
+            {% with user.userprofileinfo as info %}
+                {% if info.portfolio %}
+                    <p class='card-text'><a href="{{ info.portfolio }}">{{ info.portfolio }}</a></p>
+                {% endif %}
+                {% if info.birthdate %}
+                    <p class='card-text'>{{ info.birthdate }}</p>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+{% endblock %}

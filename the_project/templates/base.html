@@ -1,0 +1,55 @@
+<!doctype html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Django Models App</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'datatables/css/dataTables.bootstrap4.css' %}" />
+    <link rel="stylesheet" href="{% static 'datatables/fixedheader/css/fixedHeader.bootstrap4.css' %}">
+    <link rel="icon" href="{% static 'icon.png' %}" />
+</head>
+<body>
+
+<div class="jumbotron">
+    <h1 class="display-3">{{ title | default:'index.html' }}
+        {% if extra %}<small>{{extra}}</small>{% endif %}
+    </h1>
+</div>
+
+<div class="container">
+
+    <nav class="nav nav-inline nav-tabs">
+        <a class="nav-link{% if appname == 'hello' %} active{% endif %}" href="{% url 'hello:index' %}">Hello World</a>
+        <a class="nav-link{% if appname == 'models' %} active{% endif %}" href="{% url 'models:index' %}">Django Models</a>
+        <a class="nav-link{% if appname == 'forms' %} active{% endif %}" href="{% url 'forms:index' %}">Django Forms</a>
+        <a class="nav-link{% if appname == 'userinfo' %} active{% endif %}" href="{% url 'userinfo:index' %}">User Info</a>
+        {% if user.is_superuser %}
+        <a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <a class="nav-link" href={% url 'userinfo:logout' %}>Log out</a>
+            {% else %}
+        <a class="nav-link{% if appname == 'userinfo' %} active{% endif %}" href="{% url 'userinfo:login' %}">Login</a>
+
+        {% endif %}
+    </nav>
+    <section class="border border-top-0">
+    {% block body %}
+    {% endblock %}
+    </section>
+</div>
+
+
+<script src="{% static 'jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'popper.min.js' %}"></script>
+<script src="{% static 'bootstrap.min.js' %}"></script>
+<script src="{% static 'datatables/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'datatables/fixedheader/js/dataTables.fixedHeader.js' %}"></script>
+<script src="{% static 'datatables/js/dataTables.bootstrap4.js' %}"></script>
+<script src="{% static 'hello_models/run.js' %}"></script>
+</body>
+</html>

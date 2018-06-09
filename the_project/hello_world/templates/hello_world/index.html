@@ -1,32 +1,16 @@
-<!doctype html>
+{% extends 'base.html' %}
 {% load staticfiles %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Django Hello App</title>
-    <link rel="stylesheet" href="{% static "bootstrap.min.css" %}" />
-    <link rel="icon" href="{% static "icon.png" %}" />
-</head>
-<body>
-
-<div class="jumbotron">
-    <h1 class="display-3">{{ title | default:"index.html" }}</h1>
-    <p class="lead">{{ hello_message | safe }}</p>
-
-    <div class="card" style="width: 50vw;">
-      <img class="card-img-top" src="{% static "hello_world/icon.png" %}" alt="Card image cap">
-      <div class="card-body">
-        <p class="card-text">Sadrok says "RAWR!!"</p>
-      </div>
+{% block body %}
+    <div class="container-fluid align-self-center w-75">
+        <img class="img-fluid" src="{% static "hello_world/icon.png" %}" alt="Card image cap">
+        <div class="align-content-center">
+            <p class="text-center">Sadrok says "RAWR!!"</p>
+        </div>
     </div>
-</div>
-
-
-<script src="{% static "jquery-3.3.1.min.js" %}"></script>
-<script src="{% static "popper.min.js" %}"></script>
-<script src="{% static "bootstrap.min.js" %}"></script>
-</body>
-</html>
+    <div class="container align-self-center w-50">
+    <form class="form-inline align-self-center" method="GET">
+        <input class="form-control-sm" name="q" placeholder="Type something" autofocus />
+        <button class="btn-sm btn-primary" tyoe="submit">Place</button>
+    </form>
+    </div>
+{% endblock %}
