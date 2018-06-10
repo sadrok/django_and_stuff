@@ -15,6 +15,8 @@
         {% endfor %}
     </table>
 
+    {% if user.is_staff %}
     <a class="btn-sm btn-secondary" href="{% url 'userinfo:register' %}">Register new user</a>
+    {% endif %}
 
 {% endblock %}
