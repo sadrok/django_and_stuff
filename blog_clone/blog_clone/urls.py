@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/login', auth_views.login, name='login'),
     path('accounts/logout', auth_views.logout, name='logout',
-         kwargs={'next': '/'}),
+         kwargs={'next_page': '/'}),
 ]

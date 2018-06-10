@@ -1,0 +1,22 @@
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ebf1f6+0,abd3ee+12,89c3eb+13,d5ebfb+100 */
+  background: #ebf1f6; /* Old browsers */
+  background: -moz-linear-gradient(top, #ebf1f6 0%, #abd3ee 6%, #89c3eb 7%, #d5ebfb 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #ebf1f6 0%, #abd3ee 6%, #89c3eb 7%, #d5ebfb 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #ebf1f6 0%, #abd3ee 6%, #89c3eb 7%, #d5ebfb 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebf1f6', endColorstr='#d5ebfb', GradientType=0); /* IE6-9 */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.techfont {
+  font-family: 'Montserrat', sans-serif;
+
+}

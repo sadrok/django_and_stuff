@@ -1,30 +1,50 @@
 <!doctype html>
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sadrok's Madness</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
-            integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700|Roboto+Condensed" rel="stylesheet">
 </head>
 <body>
 
-<nav class="nav nav-inline">
-
-    <a class="nav-link active" href="#">Active link</a>
-    <a class="nav-link" href="#">Link</a>
-    <a class="nav-link disabled" href="#">Disabled link</a>
+<nav class="navbar navbar-expand-md techfont nav-pills">
+    <a class="navbar-brand{% if request.resolver_match.url_name == 'blog' and request.resolver_match.app_name == 'blog' %} active{% endif %}" href="{% url "blog:blog" %}">Sadrok's Blog</a>
+    <div class="navbar-nav mr-auto">
+        <a class="nav-item nav-link{% if request.resolver_match.url_name == 'about' and request.resolver_match.app_name == 'blog' %} active{% endif %}" href="{% url 'blog:about' %}">About Sadrok</a>
+        <a class="nav-item nav-link" href="https://www.github.com/sadrok">Sadrok's Github</a>
+    </div>
+    <div class="navbar-nav">
+        {% if user.is_authenticated %}
+            <div class="navbar-text">Welcome {{ user.username }}</div>
+            <a class="nav-item nav-link{% if request.resolver_match.url_name == 'new' and request.resolver_match.app_name == 'blog' %} active{% endif %}" href="{% url 'blog:new' %}">New Post</a>
+            <a class="nav-item nav-link{% if request.resolver_match.url_name == 'drafts' and request.resolver_match.app_name == 'blog' %} active{% endif %}" href="{% url 'blog:drafts' %}">Drafts</a>
+            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a class="nav-item nav-link{% if request.resolver_match.url_name == 'login' %} active{% endif %}" href={% url 'login' %}>Login</a>
+        {% endif %}
+    </div>
 </nav>
+<!-- {{ request.resolver_match.app_name }}:{{ request.resolver_match.url_name }} -->
 
-{% block body %}
-{% endblock %}
+<div class="content container">
+    <div class="row">
+        <div class="col-md-10 offset-1">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
-        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
 
 {% block scripts %}{% endblock %}
 </body>
