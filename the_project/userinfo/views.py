@@ -4,21 +4,34 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
 from django.urls import reverse
+from django.views.generic import ListView, DetailView
 
 from userinfo.forms import UserForm, UserProfileForm
 
 
-@permission_required('admin')
-def index(request):
-    """
-    List all the users. Admin rights required
-    """
-    context = {
-        'title': 'Django Users',
-        'users': User.objects.all(),
-    }
-    return render(request, 'userinfo/index.html', context)
+class UserListView(ListView):
+    template_name = 'userinfo/index.html'
+    model = User
+    context_object_name = 'users'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context.update({
+            'title': 'Users'
+        })
+        return context
+
+class UserInfoView(DetailView):
+    model = User
+    template_name = 'userinfo/info.html'
+    context_object_name = 'the_user'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'title': self.object.username
+        })
+        return context
 
 def info(request, user_id):
     """

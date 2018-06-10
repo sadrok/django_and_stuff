@@ -19,11 +19,11 @@ from django.conf.urls import include
 from django.urls import path, re_path
 from django.views.static import serve
 
-from hello_world.views import index as home_index
+from hello_world.views import IndexView
 
 
 urlpatterns = [
-    path('', home_index, name='home'),
+    path('', IndexView.as_view(), name='home'),
     path('hello/', include('hello_world.urls'), name='hello'),
     path('models/', include('hello_models.urls'), name='models'),
     path('forms/', include('hello_forms.urls'), name='forms'),

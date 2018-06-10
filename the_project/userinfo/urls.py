@@ -6,10 +6,10 @@ app_name = 'userinfo'
 
 # pylint: disable=invalid-name
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.UserListView.as_view(), name='index'),
     path('register', views.register, name='register'),
     path('login', views.user_login, name='login'),
     path('logout', views.user_logout, name='logout'),
-    re_path(r'^(?P<user_id>[0-9]+)$', views.info, name='info'),
-    re_path(r'^(?P<user_id>[0-9]+)/edit$', views.edit, name='edit'),
+    re_path(r'^(?P<pk>[0-9]+)$', views.UserInfoView.as_view(), name='info'),
+    re_path(r'^(?P<pk>[0-9]+)/edit$', views.edit, name='edit'),
 ]
