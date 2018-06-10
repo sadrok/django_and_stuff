@@ -4,14 +4,14 @@ from django.utils import timezone
 
 
 class Post(models.Model):
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey('auth.User', null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=200)
     text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now())
+    created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
-        self.published_date = timezone.now()
+        self.published_date = timezone.now
         self.save()
 
     @property
@@ -29,13 +29,13 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey('blog.models.Post', related_name='comments')
+    post = models.ForeignKey('blog.Post', related_name='comments', on_delete=models.CASCADE)
     # author may be anonymous
     author = models.CharField(max_length=200, blank=True, null=True)
     # and emails are required but not shown on site
     author_email = models.EmailField()
     text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now())
+    created_date = models.DateTimeField(default=timezone.now)
     approved = models.BooleanField(default=False)
 
     def approve(self):
