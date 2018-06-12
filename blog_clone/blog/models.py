@@ -11,7 +11,7 @@ class Post(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
 
     def publish(self):
-        self.published_date = timezone.now
+        self.published_date = timezone.now()
         self.save()
 
     @property
@@ -22,7 +22,7 @@ class Post(models.Model):
         '''
         :return: The url of this Post
         '''
-        return reverse('post_detail', kwargs={'pk': self.pk})
+        return reverse('blog:post', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.title
@@ -47,7 +47,7 @@ class Comment(models.Model):
         TODO: Creating a comment will be an AJAX function soon
         :return: The url of the post commented on
         '''
-        return reverse('post_detail', kwargs={'pk': self.post.pk})
+        return reverse('blog:post', kwargs={'pk': self.post.pk})
 
     def __str__(self):
         return self.text

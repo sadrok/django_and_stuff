@@ -4,11 +4,11 @@
     <div class="align-content-center">
         {% for post in post_list %}
             <div class="post">
-                <h1><a href="{% url 'post' pk=post.pk %}">{{ post.title }}</a></h1>
+                <h1><a href="{% url 'blog:post' pk=post.pk %}">{{ post.title }}</a></h1>
                 <div class="date">
                     <p>Published on: {{ post.published | date:"Y-M-D" }}</p>
                 </div>
-                <a href="{% url 'post' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+                <a href="{% url 'blog:post' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
             </div>
         {% endfor %}
     </div>
